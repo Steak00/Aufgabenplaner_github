@@ -1,0 +1,49 @@
+<div class="modal" *ngIf="isVisible">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>{{ isEditing ? 'Aufgabe bearbeiten' : 'Neue Aufgabe' }}</h2>
+      <span class="close-button" (click)="onCancel()">
+        <span class="close-icon">×</span>
+      </span>
+    </div>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Titel*:</label>
+        <input id="title" formControlName="title" placeholder="Was ist ihr Ziel?" required />
+      </div>
+      <div class="form-group">
+        <label for="description">Beschreibung:</label>
+        <textarea id="description" formControlName="description" placeholder="Beschreiben Sie ihr Vorgehen sowie das gewünschte Ergebnis."></textarea>
+      </div>
+      <div class="form-group row-group">
+        <div class="field-group">
+          <label for="priority">Priorität:</label>
+          <select id="priority" formControlName="priority">
+            <option value="0">Keine</option>
+            <option value="1">Niedrig</option>
+            <option value="2">Mittel</option>
+            <option value="3">Hoch</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="duedate">Fälligkeitsdatum:</label>
+          <div class="date-container">
+            <input id="duedate" type="date" formControlName="duedate" #dateInput />
+            <span class="calendar-icon" (click)="openDatePicker(dateInput)">📅</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group focus-time-group">
+        <label for="timeNeeded">Geschätzte Fokuszeit:</label>
+        <div class="focus-time-container">
+          <input id="timeNeeded" type="number" formControlName="timeNeeded" min="0" step="5" />
+          <span class="minutes-suffix">Minuten</span>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="submit">{{ isEditing ? 'Speichern' : 'Erstellen' }}</button>
+        <button type="button" (click)="onCancel()">Abbrechen</button>
+      </div>
+    </form>
+  </div>
+</div>

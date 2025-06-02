@@ -1,0 +1,87 @@
+<div class="registration-container">
+  <!-- Registration Card -->
+  <div class="card">
+    <!-- Logo -->
+    <div class="logo">
+      <div class="logo-circle">
+        <span class="logo-text">T</span>
+      </div>
+      <h1 class="section-title">TaskIt</h1>
+      <p class="body-text">Konto erstellen</p>
+    </div>
+
+    <!-- Registration Form -->
+    <form (ngSubmit)="onRegistration()" #registrationForm="ngForm">
+      <div class="input-field">
+        <input
+          type="text"
+          id="firstName"
+          [(ngModel)]="firstName"
+          name="firstName"
+          placeholder="Vorname"
+          required
+        />
+      </div>
+      <div class="input-field">
+        <input
+          type="text"
+          id="lastName"
+          [(ngModel)]="lastName"
+          name="lastName"
+          placeholder="Nachname"
+          required
+        />
+      </div>
+      <div class="input-field">
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="E-Mail"
+          required
+        />
+      </div>
+      <div class="input-field">
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Passwort"
+          required
+        />
+      </div>
+      <div class="input-field">
+        <input
+          type="password"
+          id="passwordRepeat"
+          [(ngModel)]="passwordRepeat"
+          name="passwordRepeat"
+          placeholder="Passwort bestätigen"
+          required
+        />
+      </div>
+      <div class="checkbox-container">
+        <input
+          type="checkbox"
+          id="terms"
+          [(ngModel)]="termsAccepted"
+          name="termsAccepted"
+          required
+        />
+        <label for="terms" class="small-text">
+          Ich akzeptiere die <a (click)="onTermsClick()" class="link">AGB</a> und Datenschutzrichtlinien
+        </label>
+      </div>
+      <p class="error-text" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <button type="submit" class="btn-primary">Registrieren</button>
+    </form>
+
+    <!-- Links -->
+    <div class="links">
+      <span class="small-text">Bereits ein Konto?</span>
+      <a (click)="onLoginClick()" class="small-text link">Anmelden</a>
+    </div>
+  </div>
+</div>

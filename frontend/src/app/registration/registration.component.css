@@ -1,0 +1,168 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');*/
+
+/* Container für Zentrierung */
+.registration-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9fafe;
+}
+
+/* Card Styling */
+.card {
+  width: 400px;
+  height: 550px; /* Erhöht von 500px auf 550px für zusätzliches Feld */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Logo Styling */
+.logo {
+  text-align: center;
+}
+
+.logo-circle {
+  width: 80px;
+  height: 80px;
+  background-color: #3f51b5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.logo-text {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 38px;
+  font-weight: bold;
+}
+
+.section-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+  margin: 10px 0 5px;
+}
+
+.body-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #777;
+  margin: 0;
+}
+
+/* Input Fields */
+.input-field {
+  width: 320px;
+  height: 40px;
+  margin: 10px 0;
+}
+
+.input-field input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.input-field input::placeholder {
+  color: #999;
+}
+
+/* Checkbox */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  width: 320px;
+  margin: 10px 0;
+}
+
+.checkbox-container input {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #3f51b5;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+
+.checkbox-container label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Button */
+.btn-primary {
+  width: 320px;
+  height: 40px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-primary:hover {
+  background-color: #303f9f;
+}
+
+/* Error Message */
+.error-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #d32f2f;
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* Links */
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 320px;
+  margin-top: 20px;
+}
+
+.small-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+.small-text.link {
+  color: #3f51b5;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.small-text.link:hover {
+  text-decoration: underline;
+}
+
+/* Link Styling in Checkbox */
+.checkbox-container .link {
+    color: #3f51b5;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .checkbox-container .link:hover {
+    text-decoration: underline;
+  }

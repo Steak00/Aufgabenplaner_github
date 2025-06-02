@@ -1,0 +1,42 @@
+<header class="header">
+  <div class="header-left">
+    <span class="header-text">TaskIt</span>
+    <span class="header-text subtitle" *ngIf="subtitle">{{ subtitle }}</span>
+  </div>
+  <div class="header-right">
+    <div class="timer-area" *ngIf="showTimer">
+      <ng-container *ngIf="state$ | async as state">
+        <div class="timer-circle">
+          <svg width="60" height="60">
+            <!-- Background circle -->
+            <circle cx="30" cy="30" r="27" fill="none" stroke="#e1e4f6" stroke-width="4" />
+            <!-- Timer progress circle -->
+            <circle
+              cx="30"
+              cy="30"
+              r="27"
+              fill="none"
+              stroke="white"
+              stroke-width="4"
+              stroke-linecap="round"
+              [attr.stroke-dasharray]="circleDasharray"
+              [attr.stroke-dashoffset]="getCircleDashoffset(state)"
+              transform="rotate(-90, 30, 30)"
+            />
+          </svg>
+          <div class="timer-text">
+            <span class="time">{{ state.timeRemaining | formatTime }}</span>
+          </div>
+        </div>
+        <span class="phase">{{ state.currentPhase }}</span>
+        <button class="btn-play" (click)="toggleTimer()">
+          {{ state.isRunning ? '❚❚' : '▶' }}
+        </button>
+      </ng-container>
+    </div>
+    <div class="timer-placeholder" *ngIf="!showTimer"></div>
+    <button class="logout-btn" (click)="logout()" title="Abmelden">
+      Abmelden
+    </button>
+  </div>
+</header>

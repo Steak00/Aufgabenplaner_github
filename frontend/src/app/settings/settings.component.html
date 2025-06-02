@@ -1,0 +1,158 @@
+<div class="settings-container">
+  <app-header></app-header>
+
+  <div class="settings-content">
+    <div class="card">
+      <!-- Tabs -->
+      <div class="tabs">
+        <button
+          class="tab"
+          [class.active]="activeTab === 'general'"
+          (click)="setActiveTab('general')"
+        >
+          Allgemein
+        </button>
+        <button
+          class="tab"
+          [class.active]="activeTab === 'notifications'"
+          (click)="setActiveTab('notifications')"
+        >
+          Benachrichtigungen
+        </button>
+        <button
+          class="tab"
+          [class.active]="activeTab === 'appearance'"
+          (click)="setActiveTab('appearance')"
+        >
+          Darstellung
+        </button>
+        <button
+          class="tab"
+          [class.active]="activeTab === 'account'"
+          (click)="setActiveTab('account')"
+        >
+          Konto
+        </button>
+      </div>
+
+      <!-- Form -->
+      <form [formGroup]="settingsForm">
+        <!-- General Tab -->
+        <div class="tab-content" *ngIf="activeTab === 'general'">
+          <div class="setting-item">
+            <span class="body-text">Zeitzone</span>
+            <select formControlName="timezone">
+              <option value="Europe/Berlin">Berlin (GMT+1)</option>
+              <option value="Europe/London">London (GMT+0)</option>
+              <option value="America/New_York">New York (GMT-5)</option>
+              <!-- Add more timezones as needed -->
+            </select>
+          </div>
+          <div class="setting-item">
+            <span class="body-text">Datenexport</span>
+            <button type="button" class="btn-primary" (click)="exportCsv()">CSV-Export</button>
+          </div>
+          <div class="setting-item">
+            <span class="body-text">Automatischer Start des Timers</span>
+            <div class="switch">
+              <input
+                type="checkbox"
+                id="autoStartTimer"
+                formControlName="autoStartTimer"
+              />
+              <label for="autoStartTimer" class="switch-label"></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notifications Tab -->
+        <div class="tab-content" *ngIf="activeTab === 'notifications'">
+          <div class="setting-item">
+            <span class="body-text">Automatische Statistiken</span>
+            <div class="switch">
+              <input
+                type="checkbox"
+                id="autoStatistics"
+                formControlName="autoStatistics"
+              />
+              <label for="autoStatistics" class="switch-label"></label>
+            </div>
+          </div>
+          <div class="setting-item">
+            <span class="body-text">Report alle</span>
+            <select formControlName="reportFrequency">
+              <option value="1">1 Tag</option>
+              <option value="7">7 Tage</option>
+              <option value="14">14 Tage</option>
+              <option value="30">30 Tage</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Appearance Tab -->
+        <div class="tab-content" *ngIf="activeTab === 'appearance'">
+          <div class="setting-item">
+            <span class="body-text">Dunkles Design</span>
+            <div class="switch">
+              <input type="checkbox" id="darkTheme" formControlName="darkTheme" />
+              <label for="darkTheme" class="switch-label"></label>
+            </div>
+          </div>
+          <div class="setting-item">
+            <span class="body-text">Farbpalette</span>
+            <select formControlName="colorPalette">
+              <option value="default">Standard</option>
+              <option value="blue">Blau</option>
+              <option value="green">Grün</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Account Tab -->
+        <div class="tab-content" *ngIf="activeTab === 'account'">
+          <div class="setting-item">
+            <span class="body-text" *ngIf="settings">E-Mail-Adresse: {{ settings.account.email }}</span>
+            <button type="button" class="btn-primary" (click)="changeEmail()">
+              Ändern
+            </button>
+          </div>
+          <div class="setting-item">
+            <span class="body-text">Passwort</span>
+            <button type="button" class="btn-primary" (click)="changePassword()">
+              Ändern
+            </button>
+          </div>
+          <div class="setting-item">
+            <span class="body-text">Konto löschen</span>
+            <button type="button" class="btn-danger" (click)="confirmDeleteAccount()">
+              Löschen
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Save Button -->
+      <button type="button" class="btn-primary save-btn" (click)="settingsForm.markAsDirty()">
+        Speichern
+      </button>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div *ngIf="showDeleteConfirm" class="modal-backdrop"></div>
+    <div *ngIf="showDeleteConfirm" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Konto löschen</h2>
+          <span class="close-button" (click)="cancelDelete()">×</span>
+        </div>
+        <p class="body-text">Möchten Sie Ihr Konto wirklich löschen?</p>
+        <div class="modal-actions">
+          <button type="button" class="btn-danger" (click)="deleteAccount()">Löschen</button>
+          <button type="button" class="btn-secondary" (click)="cancelDelete()">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-navigation></app-navigation>
+</div>

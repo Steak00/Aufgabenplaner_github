@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\public",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\forgot-password",
+    "\\src\\app\\login",
+    "\\src\\app\\reset-password",
+    "\\src\\app\\task-form"
+  ],
+  "SelectedNode": "\\src\\app\\task-form\\task-form.component.html",
+  "PreviewInSolutionExplorer": false
+}

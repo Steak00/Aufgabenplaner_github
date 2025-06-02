@@ -1,0 +1,39 @@
+// WORK IN PROGRESS
+ 
+/*
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { EvaluationComponent } from './evaluation.component';
+import { HeaderComponent } from '../header/header.component';
+import { NavigationComponent } from '../navigation/navigation.component';
+
+describe('EvaluationComponent', () => {
+  let component: EvaluationComponent;
+  let fixture: ComponentFixture<EvaluationComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        EvaluationComponent,
+        RouterTestingModule,
+        HeaderComponent,
+        NavigationComponent
+      ]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(EvaluationComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should render header and navigation', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('app-header')).toBeTruthy();
+    expect(compiled.querySelector('app-navigation')).toBeTruthy();
+  });
+});
+*/

@@ -1,0 +1,15 @@
+{
+  "name": "aufgabenplaner",
+  "version": "1.0.0",
+  "description": "Jira: https://taskathon.atlassian.net/jira/software/projects/SCRUM/summary",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^14.4.0"
+  }
+}

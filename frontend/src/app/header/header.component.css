@@ -1,0 +1,113 @@
+.header {
+  background: linear-gradient(to right, #3f51b5, #5c6bc0);
+  font-family: 'Roboto', sans-serif;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: 70px; /* Feste Höhe */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Größerer Abstand zwischen Timer und Logout-Button */
+}
+
+.header-text {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: normal;
+  color: white;
+  margin-left: 0.5rem;
+}
+
+.timer-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.timer-circle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.timer-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.time {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: white;
+  display: block;
+}
+
+.phase {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px; /* Deine Anpassung */
+  color: white;
+}
+
+.btn-play {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  color: #3f51b5;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.timer-placeholder {
+  width: 150px; /* Deine Anpassung */
+  height: 30px;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logout-btn i {
+  color: white;
+}
+
+.logout-btn:hover {
+  color: #ccc;
+}
+
+/* Blasser Hintergrundkreis */
+svg circle:first-child {
+  stroke: #adbaefb3; /* Deine Anpassung */
+}

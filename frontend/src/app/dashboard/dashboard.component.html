@@ -1,0 +1,102 @@
+<div class="dashboard-container">
+  <!-- Header -->
+  <app-header></app-header>
+
+  <!-- Content -->
+  <div class="dashboard-content">
+    <!-- Main Card -->
+    <div class="card">
+      <!-- Tasks Section -->
+      <div class="tasks-section">
+        <div class="tasks-header">
+          <h2 class="section-title">Heutige Aufgaben</h2>
+          <div class="sort-area">
+            <span class="sort-label">
+              Sortieren:
+              <span class="current-filter">
+                {{ selectedSort | formatSortLabel }}
+              </span>
+            </span>
+            <select [value]="selectedSort" (change)="onSortChange($event)" class="sort-select">
+              <option value="priority">Priorität</option>
+              <option value="duedate">Fälligkeitsdatum</option>
+              <option value="duration-short">Dauer (kurz)</option>
+              <option value="duration-long">Dauer (lang)</option>
+            </select>
+          </div>
+        </div>
+        <div class="tasks-list">
+          <!-- Locked Task -->
+          <ng-container *ngIf="lockedTask$ | async as lockedTask">
+            <app-task-item
+              *ngIf="lockedTask"
+              [task]="lockedTask"
+              [isLocked]="true"
+              (edit)="openEditModal($event)"
+              (delete)="deleteTask($event)"
+              (updated)="updateTask($event)"
+            ></app-task-item>
+            <hr *ngIf="lockedTask" class="completed-divider">
+          </ng-container>
+          <!-- Non-completed Tasks -->
+          <app-task-item
+            *ngFor="let task of incompleteTasks$ | async"
+            [task]="task"
+            (edit)="openEditModal($event)"
+            (delete)="deleteTask($event)"
+            (updated)="updateTask($event)"
+          ></app-task-item>
+          <!-- Divider for completed tasks -->
+          <hr *ngIf="(completedTasks$ | async)?.length" class="completed-divider">
+          <!-- Completed Tasks -->
+          <app-task-item
+            *ngFor="let task of completedTasks$ | async"
+            [task]="task"
+            (edit)="openEditModal($event)"
+            (delete)="deleteTask($event)"
+            (updated)="updateTask($event)"
+          ></app-task-item>
+        </div>
+        <button class="btn-primary" (click)="openAddModal()">+ Neue Aufgabe</button>
+      </div>
+
+      <!-- Statistics Section -->
+      <div class="statistics-section">
+        <div class="stats-card">
+          <span class="body-text bold">Heute erledigt: {{ completedTasks }}/{{ totalTasks }}</span>
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              [style.width.%]="totalTasks ? (completedTasks / totalTasks) * 100 : 0"
+            ></div>
+          </div>
+          <span class="small-text">Aktueller Fokus: 45 min</span>
+        </div>
+        <div class="stats-card">
+          <span class="body-text bold">Wochenübersicht</span>
+          <div class="bar-chart">
+            <div class="bar" style="height: 30px;"></div>
+            <div class="bar" style="height: 25px;"></div>
+            <div class="bar active" style="height: 30px;"></div>
+            <div class="bar" style="height: 20px;"></div>
+            <div class="bar" style="height: 30px;"></div>
+            <div class="bar" style="height: 35px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div *ngIf="showModal" class="modal-backdrop"></div>
+    <app-task-form
+      *ngIf="showModal"
+      [isEditing]="isEditing"
+      [task]="selectedTask"
+      (save)="onSaveTask($event)"
+      (close)="closeModal()"
+    ></app-task-form>
+  </div>
+
+  <!-- Navigation -->
+  <app-navigation></app-navigation>
+</div>

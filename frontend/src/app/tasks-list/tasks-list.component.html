@@ -1,0 +1,70 @@
+<div class="tasks-page">
+  <!-- Header -->
+  <app-header></app-header>
+
+  <!-- Inhaltsbereich -->
+  <div class="content">
+    <div class="card">
+      <!-- Filter -->
+      <div class="filters">
+        <form [formGroup]="filterForm">
+          <select formControlName="selectedStatus">
+            <option value="">Alle Stati</option>
+            <option value="Offen">Offen</option>
+            <option value="In Arbeit">In Arbeit</option>
+            <option value="Erledigt">Erledigt</option>
+          </select>
+          <select formControlName="selectedPriority">
+            <option value="">Alle Prioritäten</option>
+            <option value="1">Niedrig</option>
+            <option value="2">Mittel</option>
+            <option value="3">Hoch</option>
+          </select>
+          <div class="search-container">
+            <input formControlName="searchTerm" placeholder="Suche nach Aufgaben..." />
+            <span class="search-icon">🔍</span>
+          </div>
+        </form>
+        <button (click)="openAddModal()">+ Neu</button>
+      </div>
+
+      <!-- Tabelle -->
+      <div class="tasks-table">
+        <div class="table-header">
+          <div> </div>
+          <div>Aufgabentitel</div>
+          <div>Priorität</div>
+          <div>Zeitaufwand</div>
+          <div>Fällig in</div>
+          <div>Status</div>
+          <div>Aktionen</div>
+        </div>
+        <app-task-item
+          *ngFor="let task of filteredTasks$ | async"
+          [task]="task"
+          (edit)="openEditModal($event)"
+          (delete)="deleteTask($event)"
+          (updated)="updateTask($event)">
+        </app-task-item>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button
+          *ngFor="let page of getPages()"
+          [class.active]="(currentPage$ | async) === page"
+          (click)="changePage(page)">
+          {{ page }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigationsleiste -->
+  <router-outlet></router-outlet>
+  <app-navigation></app-navigation>
+
+  <!-- Modal -->
+  <div *ngIf="showModal" class="modal-backdrop"></div>
+  <app-task-form *ngIf="showModal" [isEditing]="isEditing" [task]="selectedTask" (save)="onSaveTask($event)" (close)="closeModal()"></app-task-form>
+</div>

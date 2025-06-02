@@ -1,0 +1,207 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'); */
+
+/* Container */
+.timer-container {
+  min-height: 100vh;
+  background-color: #f9fafe;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card */
+.card {
+  width: 600px;
+  max-width: 100%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  height: fit-content;
+}
+
+/* Timer Circle */
+.timer-circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+.timer-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.time {
+  font-family: 'Roboto', sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  color: #3f51b5;
+  display: block;
+}
+
+.phase {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #3f51b5;
+}
+
+/* Cycle Display */
+.cycle-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cycle-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.cycle-indicators {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.cycle-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #e0e4f0;
+  transition: all 0.3s ease;
+}
+
+.cycle-dot.active {
+  background-color: #3f51b5;
+  transform: scale(1.2);
+}
+
+.cycle-dot.completed {
+  background-color: #4caf50;
+}
+
+/* Timer Controls */
+.timer-controls {
+  display: flex;
+  gap: 30px;
+  margin: 20px 0;
+}
+
+.btn-primary,
+.btn-success,
+.btn-danger {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-primary {
+  background-color: #3f51b5;
+}
+
+.btn-success {
+  background-color: #4caf50;
+}
+
+.btn-danger {
+  background-color: #f44336;
+}
+
+/* Current Task */
+.current-task {
+  width: 500px;
+  max-width: 100%; /* Verhindert Überlauf auf kleinen Bildschirmen */
+  background-color: #e8f0fe;
+  border: 1px solid #c0d6f9;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.body-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #333;
+  margin: 0 5px;
+}
+
+.body-text.bold {
+  font-weight: bold;
+}
+
+.small-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  color: #777;
+  margin: 5px 0 0 5px;
+}
+
+/* Settings Card */
+.settings-card {
+  width: 500px;
+  max-width: 100%; /* Verhindert Überlauf auf kleinen Bildschirmen */
+  background-color: #f8f9fc;
+  border-radius: 6px;
+  margin: 20px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-field {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.input-field input {
+  width: 60px;
+  height: 30px;
+  border: 1px solid #d0d4e7;
+  border-radius: 4px;
+  padding: 0 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+.unit {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #333;
+  width: 30px;
+}

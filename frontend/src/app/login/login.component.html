@@ -1,0 +1,47 @@
+<div class="login-container">
+  <!-- Login Card -->
+  <div class="card">
+    <!-- Logo -->
+    <div class="logo">
+      <div class="logo-circle">
+        <span class="logo-text">T</span>
+      </div>
+      <h1 class="section-title">TaskIt</h1>
+      <p class="body-text">Anmelden, um fortzufahren</p>
+    </div>
+
+    <!-- Login Form -->
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+      <div class="input-field">
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="E-Mail"
+          required
+        />
+      </div>
+      <div class="input-field">
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Passwort"
+          required
+        />
+      </div>
+      <button type="submit" class="btn-primary">Anmelden</button>
+    </form>
+
+    <!-- Links -->
+    <div class="links">
+      <a (click)="onForgotPasswordClick()" class="small-text">Passwort vergessen</a>
+      <a (click)="onRegistrationClick()" class="small-text">Registrieren</a>
+    </div>
+
+    <br>
+    <p class="error-text" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </div>
+</div>

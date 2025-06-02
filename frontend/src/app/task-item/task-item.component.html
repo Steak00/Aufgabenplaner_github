@@ -1,0 +1,17 @@
+<div class="table-row" [ngClass]="{'locked': isLocked}">
+  <div>
+    <div class="checkbox" [ngClass]="{'completed': task.completed}" (click)="toggleCompleted()">
+      <span *ngIf="task.completed">✓</span>
+    </div>
+  </div>
+  <div [class.completed]="task.completed" [class.locked-task]="isLocked">{{ task.title }}</div>
+  <!-- break after div would lead to white space, causing the spec to crash -->
+  <div><span class="priority" [ngClass]="getPriorityClass(task.priority)">{{ getPriorityLabel(task.priority) }}</span></div>
+  <div>{{ task.timeNeeded ? task.timeNeeded + ' Minuten' : 'N/A' }}</div>
+  <div><span class="duedate" [ngClass]="getDueDateDisplay(task).color">{{ getDueDateDisplay(task).text }}</span></div>
+  <div><span class="status" [ngClass]="getStatusClass(task)">{{ getStatus(task) }}</span></div>
+  <div class="actions">
+    <button (click)="edit.emit(task)">✏️</button>
+    <button (click)="delete.emit(task.id)">🗑️</button>
+  </div>
+</div>

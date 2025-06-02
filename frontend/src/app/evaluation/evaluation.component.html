@@ -1,0 +1,166 @@
+<div class="evaluation-container">
+  <app-header></app-header>
+
+  <div class="evaluation-content">
+    <div class="card">
+      <!-- Time Period Selector -->
+      <div class="time-period-selector">
+        <span class="body-text">Zeitraum:</span>
+        <button
+          class="filter-btn"
+          [class.active]="periodForm.value.period === 'daily'"
+          (click)="onSelectPeriod('daily')"
+        >
+          Heute
+        </button>
+        <button
+          class="filter-btn"
+          [class.active]="periodForm.value.period === 'weekly'"
+          (click)="onSelectPeriod('weekly')"
+        >
+          Diese Woche
+        </button>
+        <button
+          class="filter-btn"
+          [class.active]="periodForm.value.period === 'monthly'"
+          (click)="onSelectPeriod('monthly')"
+        >
+          Letzte Woche
+        </button>
+        <button
+          class="filter-btn"
+          [class.active]="periodForm.value.period === 'yearly'"
+          (click)="onSelectPeriod('yearly')"
+        >
+          Letzter Monat
+        </button>
+      </div>
+
+      <!-- Statistics Cards -->
+      <div class="statistics-cards">
+        <!-- Completed Tasks -->
+        <div class="stat-card">
+          <h2 class="section-title">Erledigte Aufgaben</h2>
+          <div class="stat-value">
+            <span class="stat-number green">{{ evaluationData.completedTasks.count }}</span>
+            <span class="body-text green">von {{ evaluationData.completedTasks.total }}</span>
+          </div>
+          <span class="small-text"
+            >{{ evaluationData.completedTasks.percentageChange > 0 ? '+' : ''
+            }}{{ evaluationData.completedTasks.percentageChange }}% gegenüber Vormonat</span
+          >
+          <div class="progress-bar">
+            <div
+              class="progress-fill green"
+              [style.width.%]="
+                (evaluationData.completedTasks.count / evaluationData.completedTasks.total) * 100
+              "
+            ></div>
+          </div>
+        </div>
+
+        <!-- Focus Time -->
+        <div class="stat-card">
+          <h2 class="section-title">Fokuszeit</h2>
+          <div class="stat-value">
+            <span class="stat-number primary"
+              >{{ evaluationData.focusTime.hours }}h</span
+            >
+            <span class="body-text primary">{{ evaluationData.focusTime.minutes }}min</span>
+          </div>
+          <span class="small-text"
+            >{{ evaluationData.focusTime.percentageChange > 0 ? '+' : ''
+            }}{{ evaluationData.focusTime.percentageChange }}% gegenüber Vormonat</span
+          >
+          <div class="progress-bar">
+            <div class="progress-fill primary" [style.width.%]="70"></div>
+            <!-- Mock progress for now -->
+          </div>
+        </div>
+
+        <!-- Focus Time Per Day -->
+        <div class="stat-card">
+          <h2 class="section-title">Fokuszeit pro Tag</h2>
+          <div class="stat-value">
+            <span class="stat-number orange"
+              >{{ evaluationData.focusTimePerDay.hours }}h</span
+            >
+            <span class="body-text orange"
+              >{{ evaluationData.focusTimePerDay.minutes }}min</span
+            >
+          </div>
+          <span class="small-text"
+            >{{ evaluationData.focusTimePerDay.percentageChange > 0 ? '+' : ''
+            }}{{ evaluationData.focusTimePerDay.percentageChange }}% gegenüber Vormonat</span
+          >
+          <div class="progress-bar">
+            <div class="progress-fill orange" [style.width.%]="80"></div>
+            <!-- Mock progress for now -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="charts">
+        <!-- Productivity Over Time (Line Chart) -->
+        <div class="chart-card">
+          <h2 class="section-title">Produktivität über Zeit</h2>
+          <svg class="line-chart" viewBox="0 0 430 60">
+            <polyline
+              [attr.points]="getLineChartPoints()"
+              stroke="#3f51b5"
+              fill="none"
+              stroke-width="2"
+            />
+            <circle
+              *ngFor="let point of evaluationData.productivityOverTime"
+              [attr.cx]="getX(point.day)"
+              [attr.cy]="getY(point.value)"
+              r="3"
+              fill="#3f51b5"
+            />
+          </svg>
+          <div class="x-axis">
+            <span
+              *ngFor="let point of evaluationData.productivityOverTime"
+              class="small-text"
+              [style.left.px]="getX(point.day) - 10"
+              >{{ point.day }}</span
+            >
+          </div>
+        </div>
+
+        <!-- Task Distribution (Pie Chart) -->
+        <div class="chart-card">
+          <h2 class="section-title">Aufgabenverteilung</h2>
+          <div class="pie-chart-container">
+            <svg class="pie-chart" viewBox="0 0 100 100">
+              <g *ngFor="let segment of evaluationData.taskDistribution; let i = index">
+                <path
+                  [attr.d]="getPieSegmentPath(segment.percentage, i)"
+                  [attr.fill]="segment.colors[0]"
+                />
+              </g>
+            </svg>
+            <div class="legend">
+              <div
+                *ngFor="let segment of evaluationData.taskDistribution"
+                class="legend-item"
+              >
+                <span
+                  class="legend-color"
+                  [style.backgroundColor]="segment.colors[0]"
+                ></span>
+                <span class="small-text"
+                  >{{ segment.label }} ({{ segment.percentage }}%)</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-navigation></app-navigation>
+</div>

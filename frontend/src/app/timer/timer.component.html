@@ -1,0 +1,101 @@
+<div class="timer-container">
+  <!-- Header -->
+  <app-header></app-header>
+
+  <!-- Timer Card -->
+  <div class="card">
+    <!-- Pomodoro Circle -->
+    <div class="timer-circle">
+      <svg width="200" height="200">
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#e1e4f6" stroke-width="8" />
+        <circle
+          cx="100"
+          cy="100"
+          r="90"
+          fill="none"
+          stroke="#3f51b5"
+          stroke-width="8"
+          stroke-linecap="round"
+          [attr.stroke-dasharray]="circleDasharray"
+          [attr.stroke-dashoffset]="state ? getCircleDashoffset(state) : 0"
+          transform="rotate(-90, 100, 100)"
+        />
+      </svg>
+      <div class="timer-text">
+        <ng-container *ngIf="state$ | async as state">
+          <span class="time">{{ state.timeRemaining | formatTime }}</span>
+          <span class="phase">{{ state.currentPhase }}</span>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Cycle Display -->
+    <div class="cycle-display">
+      <ng-container *ngIf="state$ | async as state">
+        <span class="cycle-text">Zyklus {{ state.currentCycle }}/{{ state.cycles }}</span>
+        <div class="cycle-indicators">
+          <div
+            *ngFor="let i of getCycleArray(state.cycles)"
+            class="cycle-dot"
+            [ngClass]="{ 'active': i === state.currentCycle, 'completed': i < state.currentCycle }"
+          ></div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Timer Controls -->
+    <div class="timer-controls">
+      <button class="btn-primary" (click)="skipPhase()">▶▶</button>
+      <button class="btn-success" (click)="toggleTimer()">
+        {{ state?.isRunning ? '❚❚' : '▶' }}
+      </button>
+      <button class="btn-danger" (click)="resetTimer()">■</button>
+    </div>
+
+    <!-- Current Task -->
+    <div class="current-task" *ngIf="currentTask$ | async as currentTask">
+      <span class="body-text bold">Aktuelle Aufgabe:</span>
+      <span class="body-text">{{ currentTask?.title || 'Keine Aufgabe gesperrt' }}</span>
+      <p class="small-text">
+        Priorität: {{ getPriorityLabel(currentTask?.priority) }} | Fokuszeit: {{ currentTask?.timeNeeded || 0 }}min
+      </p>
+    </div>
+  </div>
+
+  <!-- Timer Settings -->
+  <div class="settings-card">
+    <form [formGroup]="settingsForm">
+      <div class="setting">
+        <span class="body-text">Arbeitsintervall:</span>
+        <div class="input-field">
+          <input type="number" formControlName="workInterval" min="1" />
+          <span class="unit">min</span>
+        </div>
+      </div>
+      <div class="setting">
+        <span class="body-text">Zyklen:</span>
+        <div class="input-field">
+          <input type="number" formControlName="cycles" min="1" />
+          <span class="unit"></span>
+        </div>
+      </div>
+      <div class="setting">
+        <span class="body-text">Lange Pause:</span>
+        <div class="input-field">
+          <input type="number" formControlName="longBreak" min="1" />
+          <span class="unit">min</span>
+        </div>
+      </div>
+      <div class="setting">
+        <span class="body-text">Kurze Pause:</span>
+        <div class="input-field">
+          <input type="number" formControlName="shortBreak" min="1" />
+          <span class="unit">min</span>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Navigation Bar -->
+  <app-navigation></app-navigation>
+</div>
